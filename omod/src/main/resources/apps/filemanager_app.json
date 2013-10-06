@@ -7,7 +7,7 @@
                 "id": "${project.parent.artifactId}.appId",
                 "extensionPointId": "org.openmrs.referenceapplication.homepageLink",
                 "type": "link",
-                "label": "filemanager.filemanager",
+                "label": "${project.parent.artifactId}.appname",
                 "url": "",
                 "icon": "icon-exclamation-sign",
                 "requiredPrivilege": "App: view patients"
