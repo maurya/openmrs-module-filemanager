@@ -39,6 +39,7 @@
 		<uiframeworkVersion>3.1</uiframeworkVersion>
 		<appuiVersion>1.0</appuiVersion>
 		<uicommonsVersion>1.0</uicommonsVersion>
+		<emrapiVersion>1.0</emrapiVersion>
 	</properties>
 
 	<dependencyManagement>
@@ -130,6 +131,14 @@
 				<artifactId>appframework-api</artifactId>
 				<version>${appframeworkVersion}</version>
 				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+                <artifactId>emrapi-api</artifactId>
+                <version>${emrapiVersion}</version>
+                <type>jar</type>
+                <scope>provided</scope>
 			</dependency>
 
 			<!-- End OpenMRS modules -->
