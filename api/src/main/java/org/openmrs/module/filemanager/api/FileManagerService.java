@@ -16,6 +16,8 @@ package org.openmrs.module.filemanager.api;
 import org.openmrs.api.OpenmrsService;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
+
 /**
  * This service exposes module's core functionality. It is a Spring managed bean which is configured in moduleApplicationContext.xml.
  * <p>
@@ -33,4 +35,5 @@ public interface FileManagerService extends OpenmrsService {
 	 * Add service methods here
 	 * 
 	 */
+    public void saveComplexObs() throws IOException;
 }

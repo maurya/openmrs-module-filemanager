@@ -13,11 +13,23 @@
  */
 package org.openmrs.module.filemanager.api.impl;
 
+import org.openmrs.ConceptComplex;
+import org.openmrs.Location;
+import org.openmrs.Obs;
+import org.openmrs.Person;
+import org.openmrs.api.context.Context;
 import org.openmrs.api.impl.BaseOpenmrsService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.module.filemanager.api.FileManagerService;
 import org.openmrs.module.filemanager.api.db.FileManagerDAO;
+import org.openmrs.obs.ComplexData;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 
 /**
  * It is a default implementation of {@link FileManagerService}.
@@ -41,4 +53,25 @@ public class FileManagerServiceImpl extends BaseOpenmrsService implements FileMa
     public FileManagerDAO getDao() {
 	    return dao;
     }
+
+    public void saveComplexObs() throws IOException {
+
+        ConceptComplex conceptComplex = Context.getConceptService().getConceptComplex(1867);
+        // this is assumed to have happened
+        // conceptComplex.setHandler("ImageHandler");
+
+        // Set the required properties.
+        Obs obs = new Obs(new Person(48609), conceptComplex, new Date(), new Location());
+
+        BufferedImage img = ImageIO.read(new File("/home/bmckown/Desktop/test/logo.png"));
+
+        // or:
+        // InputStream img = new FileInputStream(new File("folder", "filename"));
+
+        ComplexData complexData = new ComplexData("test-image.jpg", img);
+        obs.setComplexData(complexData);
+
+        Context.getObsService().saveObs(obs, null);
+    }
+
 }
