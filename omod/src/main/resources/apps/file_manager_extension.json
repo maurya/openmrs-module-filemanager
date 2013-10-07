@@ -3,8 +3,8 @@
 		"id": "${project.parent.artifactId}.appId",
 		"extensionPointId": "patientDashboard.visitActions",
 		"type": "link",
-		"label": "File Manager",
-		"url": "filemanager/fileManager.page?patientId={{patientId}}",
+		"label": "filemanager.label",
+		"url": "filemanager/fileManager.page?patientId={{patientId}}&visitId={{visit.id}}",
 		"icon": "icon-exclamation-sign",
 		"requiredPrivilege": "App: some random privilege",
 		"order": "500"
