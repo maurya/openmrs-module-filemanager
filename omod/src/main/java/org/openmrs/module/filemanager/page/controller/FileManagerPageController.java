@@ -3,6 +3,7 @@ package org.openmrs.module.filemanager.page.controller;
 import org.openmrs.Person;
 import org.openmrs.Patient;
 import org.openmrs.Visit;
+import org.openmrs.api.context.Context;
 import org.openmrs.module.emrapi.patient.PatientDomainWrapper;
 import org.openmrs.module.filemanager.api.FileManagerService;
 import org.openmrs.module.filemanager.api.impl.FileManagerServiceImpl;
@@ -22,7 +23,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class FileManagerPageController {
@@ -48,7 +51,7 @@ public class FileManagerPageController {
 	}
 
 	public String post(@RequestParam("patientId") Patient patient,
-//					   @RequestParam("visitId") Visit visit,
+					   @RequestParam("visitId") Visit visit,
 					   @RequestParam(value = "returnUrl", required = false) String returnUrl,
 					   HttpServletRequest request,
 					   UiUtils ui) {
@@ -56,12 +59,9 @@ public class FileManagerPageController {
 			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 			MultipartFile file = multipartRequest.getFile("file");
 			if (!file.isEmpty()) {
-				File dataDir = OpenmrsUtil.getDirectoryInApplicationDataDirectory("openmrs.module.filemanager");
-				FileManagerService service = new FileManagerServiceImpl();
-
-//				new FileManagerService().saveComplexObs(patient, visit, file, "", "");
 				if (file.getSize() <= 5242880) {
 					try {
+						Context.getService(FileManagerService.class).saveComplexObs(patient, visit, file,"", "");
 						FileOutputStream fos = new FileOutputStream("/home/gitahi/aaaaa2.jpg");
 						fos.write(file.getBytes());
 						fos.close();
@@ -71,10 +71,13 @@ public class FileManagerPageController {
 				} else {
 					request.getSession().setAttribute(WebConstants.OPENMRS_ERROR_ATTR,
 							"feedback.notification.feedback.error");
-					return null;
 				}
 			}
 		}
-		return "redirect:" + ui.pageLink("filemanager", "fileManager", SimpleObject.create("patientId", patient.getId(), "returnUrl", returnUrl));
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("patientId", patient.getId());
+		params.put("visitId", visit.getId());
+		params.put("returnUrl", returnUrl);
+		return "redirect:" + ui.pageLink("filemanager", "fileManager", params);
 	}
 }
