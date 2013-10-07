@@ -33,6 +33,5 @@ public class FileManagerPageController {
         model.addAttribute("patient", patientDomainWrapper);
 //		model.addAttribute("user", sessionContext.getCurrentUser());
 		model.addAttribute("files", personList);
-//		model.addAttribute("user", "Gitahi wa Ng'ang'a");
 	}
 }
