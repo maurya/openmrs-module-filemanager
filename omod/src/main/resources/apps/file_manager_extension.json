@@ -4,7 +4,7 @@
 		"extensionPointId": "patientDashboard.visitActions",
 		"type": "link",
 		"label": "File Manager",
-		"url": "filemanager/fileManager.page",
+		"url": "filemanager/fileManager.page?patientId={{patientId}}",
 		"icon": "icon-exclamation-sign",
 		"requiredPrivilege": "App: some random privilege",
 		"order": "500"
