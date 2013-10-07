@@ -13,9 +13,12 @@
  */
 package org.openmrs.module.filemanager.api;
 
+import org.openmrs.Patient;
+import org.openmrs.Visit;
 import org.openmrs.api.OpenmrsService;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -35,5 +38,5 @@ public interface FileManagerService extends OpenmrsService {
 	 * Add service methods here
 	 * 
 	 */
-    public void saveComplexObs() throws IOException;
+    public void saveComplexObs(Patient patient,Visit visit,File file,String description,String type) throws IOException;
 }
