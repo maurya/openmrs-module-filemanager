@@ -18,29 +18,29 @@ ${ ui.includeFragment("coreapps", "patientHeader", [ patient: patient.patient ])
 
 <table>
     <thead>
-    <tr>
-        <th>${ui.message("filemanager.upload.date")}</th>
-        <th>${ui.message("filemanager.upload.type")}</th>
-        <th>${ui.message("filemanager.upload.file")}</th>
-    </tr>
+        <tr>
+            <th>${ui.message("filemanager.upload.date")}</th>
+            <th>${ui.message("filemanager.upload.type")}</th>
+            <th>${ui.message("filemanager.upload.file")}</th>
+        </tr>
     </thead>
     <tbody>
-    <% if (files.size() == 0) { %>
-    <tr>
-        <td colspan="4">${ui.message("coreapps.none")}</td>
-    </tr>
-    <% } %>
-    <% files.each { f ->
-        def date = f.birthdate
-        def type = f.gender
-        def link = f.personVoidReason
-    %>
-    <tr id="visit-${f.personId}">
-        <td>${ui.format(date)}</td>
-        <td>${ui.format(type)}</td>
-        <td>${ui.format(link)}</td>
-    </tr>
-    <% } %>
+        <% if (files.size() == 0) { %>
+        <tr>
+            <td colspan="4">${ui.message("coreapps.none")}</td>
+        </tr>
+        <% } %>
+        <% files.each { f ->
+            def date = f.birthdate
+            def type = f.gender
+            def link = f.personVoidReason
+        %>
+        <tr id="visit-${f.personId}">
+            <td>${ui.format(date)}</td>
+            <td>${ui.format(type)}</td>
+            <td>${ui.format(link)}</td>
+        </tr>
+        <% } %>
     </tbody>
 </table>
 
