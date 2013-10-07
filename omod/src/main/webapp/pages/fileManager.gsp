@@ -8,8 +8,8 @@ ${ ui.includeFragment("coreapps", "patientHeader", [ patient: patient.patient ])
     <h1>${ui.message("filemanager.upload.title")}</h1>
     <fieldset>
         <legend>${ui.message("filemanager.upload.file")}</legend>
-        <form class="simple-form-ui" action="upload.page" id="uploadFile"
-        method="post" enctype="multipart/form-data">
+        <form class="simple-form-ui" id="uploadFile" method="post"
+        enctype="multipart/form-data">
             <input type="file" name="file" id="file" multiple="true">
             <input type="submit" value="Upload">
         </form>
