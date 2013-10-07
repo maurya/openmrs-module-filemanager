@@ -15,12 +15,7 @@ package org.openmrs.module.filemanager.api.impl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openmrs.ConceptComplex;
-import org.openmrs.Location;
-import org.openmrs.Obs;
-import org.openmrs.Patient;
-import org.openmrs.Person;
-import org.openmrs.Visit;
+import org.openmrs.*;
 import org.openmrs.api.context.Context;
 import org.openmrs.api.impl.BaseOpenmrsService;
 import org.openmrs.module.filemanager.api.FileManagerService;
@@ -59,9 +54,10 @@ public class FileManagerServiceImpl extends BaseOpenmrsService implements FileMa
 
 	public void saveComplexObs(Patient patient, Visit visit, MultipartFile file, String description, String type) throws IOException {
 
-<<<<<<< HEAD
         Encounter encounter=new Encounter();
         encounter.setEncounterDatetime(new Date());
+        encounter.setPatient(patient);
+        encounter.setLocation(new Location());
 
         ConceptComplex conceptComplex = Context.getConceptService().getConceptComplex(246);
         // this is assumed to have happened
@@ -70,24 +66,10 @@ public class FileManagerServiceImpl extends BaseOpenmrsService implements FileMa
         // Set the required properties.
         Obs obs = new Obs(patient1, conceptComplex, new Date(), new Location());
 
-        BufferedImage img = ImageIO.read(new File("/home/harsha/Downloads/me.jpg"));
+        //BufferedImage img = ImageIO.read(new File("/home/harsha/Downloads/me.jpg"));
 
-        //BufferedImage img = ImageIO.read(file);
-=======
-ConceptComplex conceptComplex = Context.getConceptService().getConceptComplex(1867);
-		// this is assumed to have happened
-		// conceptComplex.setHandler("ImageHandler");
+        BufferedImage img = ImageIO.read((File) file);
 
-		// Set the required properties.
-		Obs obs = new Obs(new Person(48609), conceptComplex, new Date(), new Location());
-
-		BufferedImage img = ImageIO.read(new File("/home/bmckown/Desktop/test/logo.png"));
->>>>>>> 2029ebc5e2e43cc66d998c9119ec71cc5c78caee
-
-		// or:
-		// InputStream img = new FileInputStream(new File("folder", "filename"));
-
-<<<<<<< HEAD
         ComplexData complexData = new ComplexData(file.getName(), img);
 
         obs.setComplexData(complexData);
@@ -97,12 +79,5 @@ ConceptComplex conceptComplex = Context.getConceptService().getConceptComplex(18
         encounter.addObs(obs);
 
     }
-=======
-		ComplexData complexData = new ComplexData("test-image.jpg", img);
-		obs.setComplexData(complexData);
-
-		Context.getObsService().saveObs(obs, null);
-	}
->>>>>>> 2029ebc5e2e43cc66d998c9119ec71cc5c78caee
 
 }
