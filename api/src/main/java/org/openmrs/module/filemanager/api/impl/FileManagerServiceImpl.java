@@ -53,22 +53,31 @@ public class FileManagerServiceImpl extends BaseOpenmrsService implements FileMa
 
     public void saveComplexObs(Patient patient,Visit visit,File file,String description,String type) throws IOException {
 
-        ConceptComplex conceptComplex = Context.getConceptService().getConceptComplex(1867);
+        Encounter encounter=new Encounter();
+        encounter.setEncounterDatetime(new Date());
+
+        ConceptComplex conceptComplex = Context.getConceptService().getConceptComplex(246);
         // this is assumed to have happened
         // conceptComplex.setHandler("ImageHandler");
-
+        Patient patient1=Context.getPatientService().getPatientByUuid("cf35bf16-2d28-4433-a0da-fe1fae6d6085");
         // Set the required properties.
-        Obs obs = new Obs(new Person(48609), conceptComplex, new Date(), new Location());
+        Obs obs = new Obs(patient1, conceptComplex, new Date(), new Location());
 
-        BufferedImage img = ImageIO.read(new File("/home/bmckown/Desktop/test/logo.png"));
+        BufferedImage img = ImageIO.read(new File("/home/harsha/Downloads/me.jpg"));
+
+        //BufferedImage img = ImageIO.read(file);
 
         // or:
         // InputStream img = new FileInputStream(new File("folder", "filename"));
 
-        ComplexData complexData = new ComplexData("test-image.jpg", img);
+        ComplexData complexData = new ComplexData(file.getName(), img);
+
         obs.setComplexData(complexData);
 
         Context.getObsService().saveObs(obs, null);
+
+        encounter.addObs(obs);
+
     }
 
 }

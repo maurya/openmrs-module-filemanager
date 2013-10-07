@@ -2,7 +2,9 @@ package org.openmrs.module.filemanager.page.controller;
 
 import org.openmrs.Person;
 import org.openmrs.Patient;
+import org.openmrs.api.context.Context;
 import org.openmrs.module.emrapi.patient.PatientDomainWrapper;
+import org.openmrs.module.filemanager.api.FileManagerService;
 import org.openmrs.ui.framework.UiUtils;
 import org.openmrs.ui.framework.page.PageModel;
 import org.openmrs.ui.framework.annotation.InjectBeans;
@@ -14,6 +16,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -45,7 +48,7 @@ public class FileManagerPageController {
     public String post(@RequestParam(value = "patientId", required = false) Patient patient,
                        @RequestParam(value = "returnUrl", required = false) String returnUrl,
                        UiUtils ui,
-                       HttpServletRequest request, PageModel model) {
+                       HttpServletRequest request, PageModel model) throws IOException {
         if (request instanceof MultipartHttpServletRequest) {
             MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
             MultipartFile file = multipartRequest.getFile("file");
@@ -64,6 +67,8 @@ public class FileManagerPageController {
                     return null;
                 }
             }
+            FileManagerService fileManagerService= Context.getService(FileManagerService.class);
+            fileManagerService.saveComplexObs(null,null,null,null,null);
         }
         return null;
     }
