@@ -13,10 +13,7 @@
  */
 package org.openmrs.module.filemanager.api.impl;
 
-import org.openmrs.ConceptComplex;
-import org.openmrs.Location;
-import org.openmrs.Obs;
-import org.openmrs.Person;
+import org.openmrs.*;
 import org.openmrs.api.context.Context;
 import org.openmrs.api.impl.BaseOpenmrsService;
 import org.apache.commons.logging.Log;
@@ -54,7 +51,7 @@ public class FileManagerServiceImpl extends BaseOpenmrsService implements FileMa
 	    return dao;
     }
 
-    public void saveComplexObs() throws IOException {
+    public void saveComplexObs(Patient patient,Visit visit,File file,String description,String type) throws IOException {
 
         ConceptComplex conceptComplex = Context.getConceptService().getConceptComplex(1867);
         // this is assumed to have happened
