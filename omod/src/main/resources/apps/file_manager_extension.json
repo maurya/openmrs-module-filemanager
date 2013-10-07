@@ -6,6 +6,7 @@
 		"label": "File Manager",
 		"url": "filemanager/fileManager.page",
 		"icon": "icon-exclamation-sign",
-		"requiredPrivilege": "App: some random privilege"
+		"requiredPrivilege": "App: some random privilege",
+		"order": "500"
 	}
 ]
