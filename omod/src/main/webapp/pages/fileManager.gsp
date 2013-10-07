@@ -11,6 +11,7 @@ ${ ui.includeFragment("coreapps", "patientHeader", [ patient: patient.patient ])
         <form class="simple-form-ui" action="upload.page" id="uploadFile"
         method="post" enctype="multipart/form-data">
             <input type="file" name="file" id="file" multiple="true">
+            <input type="submit" value="Upload">
         </form>
     </fieldset>
 </div>
